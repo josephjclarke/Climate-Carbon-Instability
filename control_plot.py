@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""
-Created on Thu Oct 24 12:06:31 2024.
-
-@author: jc1147
-"""
 
 import xarray as xr
 import glob

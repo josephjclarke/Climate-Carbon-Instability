@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""
-Created on Tue Aug 20 11:14:01 2024.
-
-@author: jc1147
-"""
 
 import numpy as np
 import matplotlib.pyplot as plt
