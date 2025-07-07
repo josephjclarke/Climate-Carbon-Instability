@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""
-Created on Mon Jan 15 10:44:33 2024.
-
-@author: jc1147
-"""
 
 import numpy as np
 import numpy.typing as npt

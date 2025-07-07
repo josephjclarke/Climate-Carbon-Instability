@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""
-Created on Tue Feb 18 10:22:08 2025.
-
-@author: Joe Clarke
-"""
 
 import os
 import xarray as xr
