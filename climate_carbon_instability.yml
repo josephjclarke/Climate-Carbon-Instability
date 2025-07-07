@@ -1,0 +1,17 @@
+name: climate_carbon_instability
+channels:
+  - defaults
+dependencies:
+  - python=3.11.9
+  - matplotlib=3.7.2
+  - numpy=1.23.5
+  - pandas=2.0.3
+  - scipy=1.11.1
+  - seaborn=0.12.2
+  - xarray=2023.6.0
+  - netcdf4=1.6.2
+  - dask=2023.6.0
+  - pip=23.2.1
+  - pip:
+    - sdeint==0.3.0
+    - numdifftools==0.9.41
