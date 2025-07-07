@@ -1,9 +1,6 @@
----
-title: Conditions for Instability in the Coupled Climate-Carbon System
-author: Joseph Clarke
----
+# Conditions for Instability in the Coupled Climate-Carbon System
 
-# Running the Code
+## Running the Code
 To run the code, you first must install the correct conda environment.
 To do this run
 ```
@@ -18,7 +15,7 @@ make
 
 The figures will will be output into a directory called figures.
 
-# File Structure
+## File Structure
 Python scripts used to produce figures in the paper are
 found in the top level directory. 
 
