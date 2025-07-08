@@ -3,7 +3,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.optimize
-import labellines
 
 from conceptual_model_with_fossil_carbon import ClimateCarbonSystem
 

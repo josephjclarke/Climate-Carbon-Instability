@@ -12,6 +12,5 @@ dependencies:
   - netcdf4=1.6.2
   - dask=2023.6.0
   - pip=23.2.1
-  - conda-forge::matplotlib-label-lines=0.7.0
   - pip:
     - numdifftools==0.9.41
