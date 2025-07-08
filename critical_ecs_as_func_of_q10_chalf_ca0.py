@@ -3,6 +3,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.optimize
+import labellines
 
 from conceptual_model_with_fossil_carbon import ClimateCarbonSystem
 
@@ -84,5 +85,39 @@ fig.supxlabel(r"$C_{1/2}$ (ppm)", x=0.45)
 fig.supylabel(r"$C_{A}^*$ (ppm)", x=0.05)
 ax1.set_title(r"$Q_{10} = 2$")
 ax2.set_title(r"$Q_{10} = 3$")
+ax1.set_xlim(ch.min(), ch.max())
+ax1.set_ylim(ca.min(), ca.max())
 plt.savefig("figures/critical_ecs_as_func_of_q10_chalf_ca0.pdf")
+plt.close()
+
+fig, (ax1, ax2) = plt.subplots(
+    nrows=1, ncols=2, sharey=True, sharex=True, figsize=(12.5, 5)
+)
+ct1 = ax1.contour(ch, ca, crit_ecs_chalf_cas_2, levels=contour_levels, colors="black")
+ct2 = ax2.contour(
+    ch,
+    ca,
+    crit_ecs_chalf_cas_3,
+    levels=sorted(contour_levels + [3.0, 5.0, 7.0]),
+    colors="black",
+)
+for ECS in map(int, contour_levels):
+    data = np.genfromtxt(f"data/XPPAUTO_data/Chalf_Ca0_Q10_2_ECS_{ECS}.dat")
+    ax1.plot(data[:, 0] / 2.12, data[:, 1] / 2.12, label=f"{ECS}K")
+for ECS in sorted(map(int, filter(lambda x: x < 10, contour_levels + [3.0, 5.0, 7.0]))):
+    data = np.genfromtxt(f"data/XPPAUTO_data/Chalf_Ca0_Q10_3_ECS_{ECS}.dat")
+    ax2.plot(data[:, 0] / 2.12, data[:, 1] / 2.12, label=f"{ECS}K")
+
+fmt = lambda x: f"{x:.0f}K"
+ax1.clabel(ct1, fmt=fmt, inline=True)
+ax2.clabel(ct2, fmt=fmt, inline=True)
+fig.supxlabel(r"$C_{1/2}$ (ppm)", x=0.45)
+fig.supylabel(r"$C_{A}^*$ (ppm)", x=0.05)
+ax1.set_title(r"$Q_{10} = 2$")
+ax2.set_title(r"$Q_{10} = 3$")
+ax1.set_xlim(ch.min(), ch.max())
+ax1.set_ylim(ca.min(), ca.max())
+ax1.legend(frameon=False)
+ax2.legend(frameon=False)
+plt.savefig("figures/XPP_test.pdf")
 plt.close()
