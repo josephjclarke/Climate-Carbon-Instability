@@ -149,9 +149,9 @@ ax4.set_ylim(5.0, 10000.0)
 ax4.set_xlim(4e1, 2e4)
 
 
-fig.supylabel(r"$C_A$ (ppm)", fontsize=20, x=0.05)
-ax3.set_xlabel("Time (years)", fontsize=14)
-ax4.set_xlabel(r"$C_L$ (PgC)", fontsize=14)
+fig.supylabel(r"$C_A$ (ppm)", fontsize=36, x=0.05)
+ax3.set_xlabel("Time (years)", fontsize=24)
+ax4.set_xlabel(r"$C_L$ (PgC)", fontsize=24)
 
 ax1.spines["bottom"].set_visible(False)
 ax1.spines["top"].set_visible(False)
@@ -176,10 +176,14 @@ ax4.spines["left"].set_position(("outward", 10))
 ax4.spines["bottom"].set_position(("outward", 10))
 
 handles, labels = ax1.get_legend_handles_labels()
-ax2.legend(handles, labels, loc="upper right", frameon=False)
+ax2.legend(handles, labels, loc="upper right", frameon=False, fontsize=18)
 
-ax1.text(0.0, 5e3, r"$C_{1/2} = 0$ ppm", fontsize=14)
-ax3.text(0.0, 5e3, r"$C_{1/2} = 344$ ppm", fontsize=14)
+ax1.text(0.0, 5e3, r"$C_{1/2} = 0$ ppm", fontsize=24)
+ax3.text(0.0, 5e3, r"$C_{1/2} = 344$ ppm", fontsize=24)
+
+for ax in (ax1, ax2, ax3, ax4):
+    ax.tick_params(axis="y", labelsize=18)
+    ax.tick_params(axis="x", labelsize=18)
 
 plt.savefig("figures/timeseries_and_phase_plane.pdf")
 plt.close()
