@@ -39,9 +39,9 @@ ax.plot(co2_ppm, npp, color="black", label="JULES", linestyle=":")
 ax.plot(
     co2_ppm,
     nppfit(co2_ppm / Ca0ppm, npp[0], fitted_xhalf),
-    label=r"$\Pi_0 = 65$PgC, $C_{1/2} = $" + f" {fitted_xhalf * Ca0ppm:.0f}ppm",
+    label=r"$\Pi_0 = 65$PgC, $C_{1/2} = $" + f" {fitted_xhalf * Ca0ppm:.0f}ppmv",
 )
-ax.set_xlabel("CO2 ppm")
+ax.set_xlabel("CO2 ppmv")
 ax.set_ylabel("NPP PgC/yr")
 ax.legend(frameon=False)
 plt.savefig("figures/jules_co2_npp.pdf")
