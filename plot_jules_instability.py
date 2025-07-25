@@ -60,7 +60,7 @@ if __name__ == "__main__":
         )
 
     ax.set_xlabel("Time (years)")
-    ax.set_ylabel("Perturbed Atmospheric Carbon (ppm)")
+    ax.set_ylabel("Perturbed Atmospheric Carbon (ppmv)")
     ax.set_yscale("log")
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
