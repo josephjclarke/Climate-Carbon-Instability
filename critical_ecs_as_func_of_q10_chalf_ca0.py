@@ -80,8 +80,8 @@ fmt = lambda x: f"{x:.0f}K"
 ax1.clabel(ct1, fmt=fmt, inline=True)
 ax2.clabel(ct2, fmt=fmt, inline=True)
 
-fig.supxlabel(r"$C_{1/2}$ (ppm)", x=0.45)
-fig.supylabel(r"$C_{A}^*$ (ppm)", x=0.05)
+fig.supxlabel(r"$C_{1/2}$ (ppmv)", x=0.45)
+fig.supylabel(r"$C_{A}^*$ (ppmv)", x=0.05)
 ax1.set_title(r"$Q_{10} = 2$")
 ax2.set_title(r"$Q_{10} = 3$")
 ax1.set_xlim(ch.min(), ch.max())
@@ -110,8 +110,8 @@ for ECS in sorted(map(int, filter(lambda x: x < 10, contour_levels + [3.0, 5.0, 
 fmt = lambda x: f"{x:.0f}K"
 ax1.clabel(ct1, fmt=fmt, inline=True)
 ax2.clabel(ct2, fmt=fmt, inline=True)
-fig.supxlabel(r"$C_{1/2}$ (ppm)", x=0.45)
-fig.supylabel(r"$C_{A}^*$ (ppm)", x=0.05)
+fig.supxlabel(r"$C_{1/2}$ (ppmv)", x=0.45)
+fig.supylabel(r"$C_{A}^*$ (ppmv)", x=0.05)
 ax1.set_title(r"$Q_{10} = 2$")
 ax2.set_title(r"$Q_{10} = 3$")
 ax1.set_xlim(ch.min(), ch.max())

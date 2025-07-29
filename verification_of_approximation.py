@@ -58,7 +58,7 @@ g.cbar.set_label(r"Growth Rate (yr$^{-1}$)")
 
 for i in range(len(Ca0s)):
     ax = g.axs.flatten()[i]
-    ax.set_xlabel(r"$C_{1/2}$ (ppm)")
+    ax.set_xlabel(r"$C_{1/2}$ (ppmv)")
     ax.plot(chalf, critical_ECS[i], color="black", label="Analytic Estimate")
     if i == 0:
         ax.set_ylabel("ECS (K)")
