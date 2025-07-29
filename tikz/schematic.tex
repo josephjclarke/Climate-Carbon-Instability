@@ -1,5 +1,4 @@
 \documentclass{standalone}
-
 \usepackage{tikz}
 \usepackage{xcolor}
 
@@ -8,48 +7,63 @@
 
 \begin{document}
 
+
 \definecolor{mygreen}{RGB}{0, 153, 0}
 \definecolor{myblue}{RGB}{0, 102, 204}
 \definecolor{myred}{RGB}{227, 66, 52}
-
-\begin{tikzpicture}[>={Stealth[width=8pt,length=10pt]}, font=\sffamily]
+\begin{tikzpicture}[
+  >={Stealth[width=8pt,length=10pt]},
+  font=\sffamily
+  ]
   \coordinate (A1) at (0,0);
   \coordinate (A2) at (6,-2);
   
   \coordinate (B1) at (11,0);
   \coordinate (B2) at (17,-2);
-
+  
   \coordinate (C1) at (5.5,-5);
   \coordinate (C2) at (11.5,-7);
-
+  
   \coordinate (B3) at (14, -2);
   \coordinate (C3) at (11.5, -5);
   \coordinate (A3) at (3, -2);
   \coordinate (C4) at (8.5,-5);
   \coordinate (A4) at (6, -1);
   \coordinate (B4) at (11, -1);
-
+  
   \coordinate (R1) at (10, -3.5);
   \coordinate (R2) at (6, -3.5);
   
-  \draw[very thick] (A1) rectangle (A2) node[midway] {\Large Atmospheric CO$_2$} ;
-  \draw[very thick] (B1) rectangle (B2) node[midway] {\Large Global Mean Temperature};
-  \draw[very thick] (C1) rectangle (C2) node[midway] {\Large \textcolor{mygreen}{Land} and \textcolor{myblue}{Ocean} Carbon};
-
-  \draw[->, very thick] ($(B3) + (-0.1,-0.1)$) -- ($(C3) + (0.1,0.1)$)
-      node[pos=0.33, right, align=right]  {\large \textcolor{mygreen}{\emph{Increased}} \\ \large \textcolor{mygreen}{\emph{Soil Respiration}}}
-      node[pos=0.8, right,align=right] {\large \textcolor{myblue}{\emph{Increased}} \\ \large \textcolor{myblue}{\emph{CO\textsubscript{2} Solubility}}};
-  \draw[->, very thick] ($(A3) + (0.1,-0.1)$) -- ($(C1) + (-0.1,0.1)$)
-      node[pos=0.33, left, align=left] {\large \textcolor{mygreen}{\emph{Increased}} \\ \large \textcolor{mygreen}{\emph{CO\textsubscript{2} Fertilization}}}
-      node[pos=0.8, left, align=left] {\large \textcolor{myblue}{\emph{Increased}} \\ \large \textcolor{myblue}{\emph{Ocean Sink}}};
-  \draw[->, very thick] ($(C4) + (-0.1,0.1)$) -- ($(A2) + (0.1,-0.1)$) node[pos=0.57, right, align=right] {\large \emph{Carbon}\\\large\emph{Sinks}};
-  \draw[->, very thick] ($(A4) + (0.1,0.0)$) -- ($(B4) + (-0.1,0.0)$) node[pos=0.5, above,align=center] {\large \emph{Increased}\\\large\emph{Greenhouse Effect}};
-
-  \draw[very thick, myred, fill=myred, fill opacity=0.1] (R1) circle (0.5);
+  \draw[very thick] (A1) rectangle (A2) 
+  node[midway] {\Large Atmospheric CO$_2$};
+  \draw[very thick] (B1) rectangle (B2) 
+  node[midway] {\Large Global Mean Temperature};
+  \draw[very thick] (C1) rectangle (C2) 
+  node[midway] {\Large \textcolor{mygreen}{Land} and \textcolor{myblue}{Ocean} Carbon};
+  
+  \draw[->, very thick] ($(B3)+(-0.1,-0.1)$)--($(C3) + (0.1,0.1)$)
+  node[pos=0.33, right, align=right]  
+  {\large \textcolor{mygreen}{\emph{Increased}} \\ \large \textcolor{mygreen}{\emph{Soil Respiration}}}
+  node[pos=0.8, right,align=right]
+  {\large \textcolor{myblue}{\emph{Increased}} \\ \large \textcolor{myblue}{\emph{CO\textsubscript{2} Solubility}}};
+  \draw[->, very thick] ($(A3)+(0.1,-0.1)$)--($(C1) + (-0.1,0.1)$)
+  node[pos=0.33, left, align=left] 
+  {\large \textcolor{mygreen}{\emph{Increased}} \\ \large \textcolor{mygreen}{\emph{CO\textsubscript{2} Fertilization}}}
+  node[pos=0.8, left, align=left] 
+  {\large \textcolor{myblue}{\emph{Increased}} \\ \large \textcolor{myblue}{\emph{Ocean Sink}}};
+  \draw[->, very thick] ($(C4)+(-0.1,0.1)$)--($(A2)+(0.1,-0.1)$)      node[pos=0.57, right, align=right] 
+  {\large \emph{Carbon}\\\large\emph{Sinks}};
+  \draw[->, very thick] ($(A4)+(0.1,0.0)$)--($(B4)+(-0.1,0.0)$)       node[pos=0.5, above,align=center] 
+  {\large \emph{Increased}\\\large\emph{Greenhouse Effect}};
+  
+  \draw[very thick, myred,
+  fill=myred,
+  fill opacity=0.1] (R1) circle (0.5);
   \draw (R1) -- (R1) node {\huge \textcolor{myred}{\textbf{+}}};
-
-  \draw[very thick, black, fill=black, fill opacity=0.1] (R2) circle (0.5);
+  
+  \draw[very thick, black,
+  fill=black, fill opacity=0.1] (R2) circle (0.5);
   \draw (R2) -- (R2) node {\huge \textbf{-}};
   
-  \end{tikzpicture}
+\end{tikzpicture}
 \end{document}
