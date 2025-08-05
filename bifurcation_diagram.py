@@ -15,7 +15,7 @@ def single_par_plot(
     lw=1.5,
     linestyles=["solid", "dashed"],
     PO=True,
-    colour_PO="darkgreen",
+    colour_PO="#E1BE6A",
     beta=1,
 ):
     counter = 0
@@ -99,21 +99,21 @@ fig, (ax1, ax2) = plt.subplots(nrows=2, sharex=True)
 single_par_plot(
     data1,
     ax1,
-    "tab:blue",
+    "#40B0A6",
     lw=1.5,
     linestyles=["solid", "dashed"],
     PO=True,
-    colour_PO="tab:green",
+    colour_PO="#E1BE6A",
     beta=1,
 )
 single_par_plot(
     data2,
     ax2,
-    "tab:blue",
+    "#40B0A6",
     lw=1.5,
     linestyles=["solid", "dashed"],
     PO=True,
-    colour_PO="tab:green",
+    colour_PO="#E1BE6A",
     beta=1,
 )
 ax1.set_xlim(3.0, 15.0)
