@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import scipy.stats
 import scipy.optimize
 import pandas as pd
-import seaborn as sns
+import tol_colors as tc
 
 plt.rcParams["text.usetex"] = True
 plt.rcParams["font.family"] = "serif"
@@ -37,7 +37,7 @@ if __name__ == "__main__":
     ECSs = [float(jf.split("_")[-1][:-3]) for jf in jules_files]
 
     print(f"Discovered ECSs: {ECSs}")
-    colors = sns.color_palette("tab20", len(ECSs))
+    colors = tc.sunset_discrete.resampled(len(ECSs)).colors
     print(f"{len(ECSs)} files found, {len(colors)} colors found")
 
     rates = []

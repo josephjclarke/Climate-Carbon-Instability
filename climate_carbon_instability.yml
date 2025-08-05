@@ -14,3 +14,4 @@ dependencies:
   - pip=23.2.1
   - pip:
     - numdifftools==0.9.41
+    - tol-colors==2.1.0
