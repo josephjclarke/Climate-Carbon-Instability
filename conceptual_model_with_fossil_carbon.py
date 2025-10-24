@@ -45,6 +45,8 @@ class ClimateCarbonSystem:
     cubic_feedback: float = 0.0
     land_global_warming_ratio: float = 1.3  # warming over land / warming globally
     sigma_Q: float = 0.5
+    allow_T_dependence: bool = False
+    use_T1: bool = False
 
     def __post_init__(self):
         """
@@ -167,7 +169,25 @@ class ClimateCarbonSystem:
             array of kh.
 
         """
-        return np.full_like(T, self.kH0, dtype=np.float64)
+        if self.allow_T_dependence:
+            temp = 298.0 + T
+            S = 35.0
+            A1 = -60.2409
+            A2 = 93.4517
+            A3 = 23.3585
+            B1 = 0.023517
+            B2 = -0.023656
+            B3 = 0.0047036
+            logK = (
+                A1
+                + A2 * (100 / temp)
+                + A3 * np.log(temp / 100)
+                + S * (B1 + B2 * temp / 100.0 + B3 * (temp / 100) ** 2)
+            )
+            kh = 55.57 / 1.027 / np.exp(logK)
+        else:
+            kh = self.kH0
+        return np.full_like(T, kh, dtype=np.float64)
 
     def calc_A(self, T=0):
         """
@@ -205,11 +225,14 @@ class ClimateCarbonSystem:
         """
         c = np.full_like(C1, self.C10) if self.linear_ocean else C1
 
-        B_b = (-self.Alk + c) * self.k1 + 4 * (self.Alk - 2 * c) * self.k2
-        B_disc = (self.k1 * (self.Alk - c)) ** 2 - 4 * self.Alk * self.k1 * self.k2 * (
+        k1 = self.k1
+        k2 = self.k2
+
+        B_b = (-self.Alk + c) * k1 + 4 * (self.Alk - 2 * c) * k2
+        B_disc = (k1 * (self.Alk - c)) ** 2 - 4 * self.Alk * k1 * k2 * (
             self.Alk - 2 * c
         )
-        return (B_b + np.sqrt(B_disc)) / (2 * c * (self.k1 - 4 * self.k2))
+        return (B_b + np.sqrt(B_disc)) / (2 * c * (k1 - 4 * k2))
 
     def calc_dBdC1(self, C1):
         """
@@ -275,7 +298,7 @@ class ClimateCarbonSystem:
         T1, T2, CL, C1, C2 = y
         Ca = self.get_Ca(y)
 
-        A = self.calc_A()
+        A = self.A(T1) if self.use_T1 else self.calc_A(T2)
         B = self.calc_B(C1)
 
         dOLR = self.L + self.quadratic_feedback * T1 + self.cubic_feedback * T1**2
@@ -312,7 +335,7 @@ class ClimateCarbonSystem:
         T1, T2, CL, C1, C2 = y
         Ca = self.get_Ca(y)
 
-        A = self.calc_A()
+        A = self.calc_A(T1) if self.use_T1 else self.calc_A(T2)
         B = self.calc_B(C1)
         dBdC1 = self.calc_dBdC1(C1)
 
@@ -383,6 +406,7 @@ class ClimateCarbonSystem:
 
         """
         y0 = self.y0 if initial_condition is None else initial_condition
+        jac = self.DdFdt if not self.allow_T_dependence else None
         sol = scipy.integrate.solve_ivp(
             self.dFdt, (0.0, self.t_final), y0, jac=self.DdFdt, method="LSODA"
         )
@@ -547,7 +571,7 @@ class ClimateCarbonSystem:
         Growth rate : float.
 
         """
-        A = self.calc_A()
+        A = self.calc_A(T1)
         B = self.calc_B(self.C10)
         dB = self.calc_dBdC1(self.C10)
         f = A * B + A * dB * self.C10
