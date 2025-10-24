@@ -51,8 +51,8 @@ g = da.plot(
 
 ticks = g.cbar.get_ticks()
 tick_labels = [str(t) for t in ticks]
-tick_labels[0] = "Stable"
-tick_labels[-1] = "Unstable"
+tick_labels[0] = "More Stable"
+tick_labels[-1] = "More Unstable"
 g.cbar.set_ticks(ticks, labels=tick_labels)
 g.cbar.set_label(r"Growth Rate (yr$^{-1}$)")
 
