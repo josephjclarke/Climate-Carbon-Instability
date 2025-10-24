@@ -127,3 +127,9 @@ print("p0", p0)
 print("popt", popt)
 print("pH", pH(k_init, fitted_Alk))
 print("E'(C1)", Eprime(C1eq(k_init, fitted_Alk), k_init, fitted_Alk).item())
+
+c1eq = C1eq(k_init, fitted_Alk).item()
+print(
+    f"The carbon in the ocean is thus {c1eq} + {c1eq / V1V2_init}"
+    + f" = {c1eq*(1+1/V1V2_init)}PgC"
+)
