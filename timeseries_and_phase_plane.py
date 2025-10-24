@@ -55,20 +55,20 @@ df = pd.concat(data)
 
 fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(20, 10))
 ax1.plot(
-    df[(df.Chalf == 0) & (df.ECS == 3.0)].Time,
-    df[(df.Chalf == 0) & (df.ECS == 3.0)].Ca,
+    df[(df.Chalf == 344.0) & (df.ECS == 3.0)].Time,
+    df[(df.Chalf == 344.0) & (df.ECS == 3.0)].Ca,
     label="ECS = 3K",
     linewidth=3,
 )
 ax1.plot(
-    df[(df.Chalf == 0) & (df.ECS == 6.0)].Time,
-    df[(df.Chalf == 0) & (df.ECS == 6.0)].Ca,
+    df[(df.Chalf == 344.0) & (df.ECS == 6.0)].Time,
+    df[(df.Chalf == 344.0) & (df.ECS == 6.0)].Ca,
     label="ECS = 6K",
     linewidth=3,
 )
 ax1.plot(
-    df[(df.Chalf == 0) & (df.ECS == 12.0)].Time,
-    df[(df.Chalf == 0) & (df.ECS == 12.0)].Ca,
+    df[(df.Chalf == 344.0) & (df.ECS == 12.0)].Time,
+    df[(df.Chalf == 344.0) & (df.ECS == 12.0)].Ca,
     label="ECS = 12K",
     linewidth=3,
 )
@@ -76,20 +76,20 @@ ax1.plot(
 ax1.axhline(Ca0, color="black", linestyle="--", label="Equilibrium")
 
 ax3.plot(
-    df[(df.Chalf == 344.0) & (df.ECS == 3.0)].Time,
-    df[(df.Chalf == 344.0) & (df.ECS == 3.0)].Ca,
+    df[(df.Chalf == 0.0) & (df.ECS == 3.0)].Time,
+    df[(df.Chalf == 0.0) & (df.ECS == 3.0)].Ca,
     label="ECS = 3K",
     linewidth=3,
 )
 ax3.plot(
-    df[(df.Chalf == 344.0) & (df.ECS == 6.0)].Time,
-    df[(df.Chalf == 344.0) & (df.ECS == 6.0)].Ca,
+    df[(df.Chalf == 0.0) & (df.ECS == 6.0)].Time,
+    df[(df.Chalf == 0.0) & (df.ECS == 6.0)].Ca,
     label="ECS = 6K",
     linewidth=3,
 )
 ax3.plot(
-    df[(df.Chalf == 344.0) & (df.ECS == 12.0)].Time,
-    df[(df.Chalf == 344.0) & (df.ECS == 12.0)].Ca,
+    df[(df.Chalf == 0.0) & (df.ECS == 12.0)].Time,
+    df[(df.Chalf == 0.0) & (df.ECS == 12.0)].Ca,
     label="ECS = 12K",
     linewidth=3,
 )
@@ -97,38 +97,38 @@ ax3.plot(
 ax3.axhline(Ca0, color="black", linestyle="--")
 
 ax2.plot(
-    df[(df.Chalf == 0) & (df.ECS == 3.0)].CL,
-    df[(df.Chalf == 0) & (df.ECS == 3.0)].Ca,
-    zorder=9,
-    linewidth=3,
-)
-ax2.plot(
-    df[(df.Chalf == 0) & (df.ECS == 6.0)].CL,
-    df[(df.Chalf == 0) & (df.ECS == 6.0)].Ca,
-    zorder=8,
-    linewidth=3,
-)
-ax2.plot(
-    df[(df.Chalf == 0) & (df.ECS == 12.0)].CL,
-    df[(df.Chalf == 0) & (df.ECS == 12.0)].Ca,
-    linewidth=3,
-)
-
-ax4.plot(
     df[(df.Chalf == 344.0) & (df.ECS == 3.0)].CL,
     df[(df.Chalf == 344.0) & (df.ECS == 3.0)].Ca,
     zorder=9,
     linewidth=3,
 )
-ax4.plot(
+ax2.plot(
     df[(df.Chalf == 344.0) & (df.ECS == 6.0)].CL,
     df[(df.Chalf == 344.0) & (df.ECS == 6.0)].Ca,
     zorder=8,
     linewidth=3,
 )
-ax4.plot(
+ax2.plot(
     df[(df.Chalf == 344.0) & (df.ECS == 12.0)].CL,
     df[(df.Chalf == 344.0) & (df.ECS == 12.0)].Ca,
+    linewidth=3,
+)
+
+ax4.plot(
+    df[(df.Chalf == 0.0) & (df.ECS == 3.0)].CL,
+    df[(df.Chalf == 0.0) & (df.ECS == 3.0)].Ca,
+    zorder=9,
+    linewidth=3,
+)
+ax4.plot(
+    df[(df.Chalf == 0.0) & (df.ECS == 6.0)].CL,
+    df[(df.Chalf == 0.0) & (df.ECS == 6.0)].Ca,
+    zorder=8,
+    linewidth=3,
+)
+ax4.plot(
+    df[(df.Chalf == 0.0) & (df.ECS == 12.0)].CL,
+    df[(df.Chalf == 0.0) & (df.ECS == 12.0)].Ca,
     linewidth=3,
 )
 
@@ -149,7 +149,7 @@ ax4.set_ylim(5.0, 10000.0)
 ax4.set_xlim(4e1, 2e4)
 
 
-fig.supylabel(r"$C_A$ (ppmv)", fontsize=36, x=0.05)
+fig.supylabel(r"$C_A$ (ppmv)", fontsize=28, x=0.05)
 ax3.set_xlabel("Time (years)", fontsize=24)
 ax4.set_xlabel(r"$C_L$ (PgC)", fontsize=24)
 
@@ -176,14 +176,21 @@ ax4.spines["left"].set_position(("outward", 10))
 ax4.spines["bottom"].set_position(("outward", 10))
 
 handles, labels = ax1.get_legend_handles_labels()
-ax2.legend(handles, labels, loc="upper right", frameon=False, fontsize=18)
+fig.legend(
+    handles,
+    labels,
+    loc="center left",
+    bbox_to_anchor=(0.93, 0.5),
+    frameon=False,
+    fontsize=18,
+)
 
-ax1.text(0.0, 5e3, r"$C_{1/2} = 0$ ppmv", fontsize=24)
-ax3.text(0.0, 5e3, r"$C_{1/2} = 344$ ppmv", fontsize=24)
+ax1.text(0.0, 5e3, r"With CO$_2$ fertilisation", fontsize=18)
+ax3.text(0.0, 5e3, r"Without CO$_2$ fertilisation", fontsize=18)
 
 for ax in (ax1, ax2, ax3, ax4):
     ax.tick_params(axis="y", labelsize=18)
     ax.tick_params(axis="x", labelsize=18)
 
-plt.savefig("figures/timeseries_and_phase_plane.pdf")
+plt.savefig("figures/timeseries_and_phase_plane.pdf", bbox_inches="tight")
 plt.close()
