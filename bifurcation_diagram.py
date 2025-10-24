@@ -7,6 +7,9 @@ import seaborn as sns
 plt.rcParams["text.usetex"] = True
 plt.rcParams["font.family"] = "serif"
 
+c1 = "#dd8452"
+c2 = "#4c72b0"
+
 
 def single_par_plot(
     data,
@@ -15,7 +18,7 @@ def single_par_plot(
     lw=1.5,
     linestyles=["solid", "dashed"],
     PO=True,
-    colour_PO="#E1BE6A",
+    colour_PO=c1,
     beta=1,
 ):
     counter = 0
@@ -99,21 +102,21 @@ fig, (ax1, ax2) = plt.subplots(nrows=2, sharex=True)
 single_par_plot(
     data1,
     ax1,
-    "#40B0A6",
+    c2,
     lw=1.5,
     linestyles=["solid", "dashed"],
     PO=True,
-    colour_PO="#E1BE6A",
+    colour_PO=c1,
     beta=1,
 )
 single_par_plot(
     data2,
     ax2,
-    "#40B0A6",
+    c2,
     lw=1.5,
     linestyles=["solid", "dashed"],
     PO=True,
-    colour_PO="#E1BE6A",
+    colour_PO=c1,
     beta=1,
 )
 ax1.set_xlim(3.0, 15.0)
