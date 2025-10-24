@@ -29,5 +29,11 @@ figures/fig07.pdf: figures/jules_growth_rate_fit_many.pdf
 
 number_figures: figures/fig01.pdf figures/fig02.pdf figures/fig03.pdf figures/fig04.pdf figures/fig05.pdf figures/fig06.pdf figures/fig07.pdf
 
+convert_to_png:
+	@for f in figures/*.pdf; do \
+		echo "Converting $$f to PNG"; \
+		convert -density 300 "$$f" -quality 100 "$${f%.pdf}.png"; \
+	done
 clean:
-	rm figures/*.pdf
+	rm -f figures/*.pdf
+	rm -f figures/*.png
