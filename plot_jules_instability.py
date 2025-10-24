@@ -16,6 +16,9 @@ data_dir = "data/runs/"
 Ca0 = 286.085
 fit_period = slice(25, None)
 
+earth_radius = 6400.0 * 1000.0
+secs_in_year = 360 * 24 * 60.0 * 60.0
+
 
 def ff(E, q1, q2, q3):
     return (q1 + q2 * E) / (1 + q3 * E)
@@ -24,6 +27,11 @@ def ff(E, q1, q2, q3):
 def critical_ecs(popt, noise=0.0):
     q1, q2, q3 = popt
     return -(q1 + noise) / (q2 + q3 * noise)
+
+
+def cosdeg(x):
+    """Calculate the cosine of argument in degrees."""
+    return np.cos(np.deg2rad(x))
 
 
 if __name__ == "__main__":
@@ -62,6 +70,9 @@ if __name__ == "__main__":
     ax.set_xlabel("Time (years)")
     ax.set_ylabel("Perturbed Atmospheric Carbon (ppmv)")
     ax.set_yscale("log")
+    yticks = [0.3, 0.4, 0.6, 1.0, 1.5, 2.0]
+    ax.set_yticks(yticks)
+    ax.set_yticklabels([str(y) for y in yticks])
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
     ax.legend(frameon=False, loc="center left", bbox_to_anchor=(1, 0.5), reverse=True)
@@ -108,3 +119,52 @@ if __name__ == "__main__":
     print(f"Critical ECS = {best}")
     print(f"{(1 - alpha)*100}% confidence interval: [{lower}, {upper}]")
     print(f"Assuming a symmetric range: ±{0.5 * (upper - lower)}")
+
+    fig, ax = plt.subplots(figsize=(10, 6))
+    for jf, ECS, color in zip(jules_files, ECSs, colors):
+        print(f"On ECS = {ECS}")
+        data = xr.open_dataset(data_dir + jf)
+        lats = data.latitude
+        areas = earth_radius**2 * cosdeg(lats) * np.deg2rad(3.75) * np.deg2rad(2.5)
+
+        c_soil = (
+            data["cs"].sum(["scpool", "sclayer"]).weighted(areas).sum("land") * 1e-15
+        )
+
+        ax.plot(
+            10 * c_soil.decade, c_soil - c_soil[0], color=color, label=f"ECS = {ECS}K"
+        )
+
+    ax.set_xlabel("Time (years)")
+    ax.set_ylabel("Perturbed Soil Carbon (PgC)")
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.legend(frameon=False, loc="center left", bbox_to_anchor=(1, 0.5), reverse=True)
+    plt.tight_layout()
+    plt.savefig("figures/jules_dCs.pdf")
+    plt.close()
+
+    fig, ax = plt.subplots(figsize=(10, 6))
+    for jf, ECS, color in zip(jules_files, ECSs, colors):
+        print(f"On ECS = {ECS}")
+        data = xr.open_dataset(data_dir + jf)
+        lats = data.latitude
+        areas = earth_radius**2 * cosdeg(lats) * np.deg2rad(3.75) * np.deg2rad(2.5)
+
+        c_o = (
+            data["fa_ocean"].sum(["nfarray"])
+            / 20.0
+            * 2.12
+            * (4 * np.pi * 0.711 * earth_radius**2)
+        )
+
+        ax.plot(10 * c_o.decade, c_o, color=color, label=f"ECS = {ECS}K")
+
+    ax.set_xlabel("Time (years)")
+    ax.set_ylabel("Perturbed Ocean Carbon (PgC)")
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.legend(frameon=False, loc="center left", bbox_to_anchor=(1, 0.5), reverse=True)
+    plt.tight_layout()
+    plt.savefig("figures/jules_dCo.pdf")
+    plt.close()
