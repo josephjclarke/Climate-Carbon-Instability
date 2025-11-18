@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17640187.svg)](https://doi.org/10.5281/zenodo.17640187)
 # Conditions for Instability in the Coupled Climate-Carbon System
 
 ## Running the Code
